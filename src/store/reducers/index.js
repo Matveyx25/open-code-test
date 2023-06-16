@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-// import * as  issues from './issues.reducer';
+import { bankInfoReducer } from './bank-info.reducer';
 
 export const combinedReducer = combineReducers({
-	// issues: issues.reducer
+	bankInfo: bankInfoReducer
 });
