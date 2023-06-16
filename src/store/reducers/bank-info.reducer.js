@@ -56,7 +56,7 @@ export const updateBankInfo = (id, content) => async (dispatch) => {
 
 const setNewBankInfo = (bankInfo) => ({type: CreateBankInfo, bankInfo});
 export const addBankInfo = (content) => async (dispatch) => {
-	let response = await bankInfoService.updateBankInfo(content);
+	let response = await bankInfoService.createBankInfo(content);
 	if(response.status === 204){
 		dispatch(setNewBankInfo(content));
 	}
