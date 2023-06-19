@@ -1,30 +1,18 @@
-import { applyMiddleware, createStore } from 'redux';
-import { createEpicMiddleware } from 'redux-observable';
-import { combinedReducer } from './reducers';
-import actionToPlainObjectConverter from 'redux-action-class';
-import { rootEpics } from './epics';
+import thunkMiddlewere from "redux-thunk"
+import {
+    applyMiddleware,
+    compose,
+    createStore } from "redux";
+import { combinedReducer } from "./reducers";
 
-const reducer = (state, action) => {
-    return combinedReducer(state, action);
-};
+const reducers = (state, action) => {
+	return combinedReducer(state, action)
+}
 
-const bindMiddleware = (middleware) => {
-  if (process.env.NODE_ENV !== 'production') {
-    const { composeWithDevTools } = require('redux-devtools-extension');
-    return composeWithDevTools(applyMiddleware(...middleware));
-  }
-  return applyMiddleware(...middleware);
-};
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
-export const initStore = () => {
-  const epicMiddleware = createEpicMiddleware();
+export const store = createStore(reducers, composeEnhancers(
+    applyMiddleware(thunkMiddlewere)
+))
 
-  const store = createStore(reducer, bindMiddleware([
-    epicMiddleware,
-    actionToPlainObjectConverter,
-  ]));
-
-  epicMiddleware.run(rootEpics);
-
-  return store;
-};
+window.store = store
