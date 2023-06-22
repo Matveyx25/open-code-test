@@ -7,7 +7,7 @@ import 'reactjs-popup/dist/index.css';
 import { Input } from "../../components/Manuals/Input/Input"
 import { Button } from "../../components/Manuals/Button/Button"
 
-export const Manuals = ({id, manuals, fetchingList, addManual, removeManual}) => {
+export const Manuals = ({id, manuals, fetchingList, addManual, removeManual, getManualById}) => {
 	const [selected, setSelected] = useState()
 	const [dialog, setDialog] = useState(false)
 	const [manualCode, setManualCode] = useState('')
@@ -29,7 +29,7 @@ export const Manuals = ({id, manuals, fetchingList, addManual, removeManual}) =>
 			<p>Loading</p>
 			:<div>
 				<Filters/>
-				<Events {...{selected, setDialog, removeManual}}/>
+				<Events {...{selected, setDialog, removeManual, updateHandler: () => getManualById(id)}}/>
 				<DataTable {...{manuals, selected, setSelected}}/>			
 			</div>}
 		</>

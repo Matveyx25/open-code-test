@@ -10,7 +10,7 @@ const ManualsContainer = ({manuals, getManualById, fetchingList, addManual, remo
 		getManualById(id)
 	}, [])
 
-	return <Manuals {...{manuals, fetchingList, addManual, id, removeManual}}/>
+	return <Manuals {...{manuals, fetchingList, addManual, id, removeManual, getManualById}}/>
 }
 
 const mapStateToProps = (state) => ({
