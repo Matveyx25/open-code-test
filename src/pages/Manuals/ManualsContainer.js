@@ -1,40 +1,21 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { Manuals } from './Manuals'
+import { getManualById, addManual, removeManual } from '../../store/reducers/manuals.reducer'
 
-const manuals = [
-  {
-    "Id": 0,
-    "Code": "RQST",
-    "Description": "Ответ на ЭС-запрос участника",
-    "CTime": "2023-05-17T18:31:47Z",
-    "CUser": 0,
-    "ETime": "2023-05-17T18:31:47Z",
-    "EUser": 0,
-    "IsDeleted": false
-  },
-  {
-    "Id": 0,
-    "Code": "RQST",
-    "Description": "Ответ на ЭС-запрос участника",
-    "CTime": "2023-05-17T18:31:47Z",
-    "CUser": 0,
-    "ETime": "2023-05-17T18:31:47Z",
-    "EUser": 0,
-    "IsDeleted": false
-  },
-  {
-    "Id": 0,
-    "Code": "RQST",
-    "Description": "Ответ на ЭС-запрос участника",
-    "CTime": "2023-05-17T18:31:47Z",
-    "CUser": 0,
-    "ETime": "2023-05-17T18:31:47Z",
-    "EUser": 0,
-    "IsDeleted": false
-  },
-]
+const ManualsContainer = ({manuals, getManualById, fetchingList, addManual, removeManual}) => {
+	const id = 1
 
-const ManualsContainer = () => <Manuals {...{manuals}}/>
+	useEffect(() => {
+		getManualById(id)
+	}, [])
 
-export default connect(null, null)(ManualsContainer)
+	return <Manuals {...{manuals, fetchingList, addManual, id, removeManual}}/>
+}
+
+const mapStateToProps = (state) => ({
+	manuals: state.manuals.currentManual,
+	fetchingList: state.manuals.fetchingList
+})
+
+export default connect(mapStateToProps, {getManualById, addManual, removeManual})(ManualsContainer)

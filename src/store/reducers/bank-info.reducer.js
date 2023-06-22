@@ -17,9 +17,9 @@ export const bankInfoReducer = (state = initialState, action) => {
             return {
                 ...state,
                 banksInfo: [
-									...state.banksInfo.splice(0, update_index),
+									...state.banksInfo.slice(0, update_index),
 									{id: action.bankInfo.id, Name: action.bankInfo.content.Name},
-									...state.banksInfo.splice(update_index + 1)
+									...state.banksInfo.slice(update_index + 1)
 								]
             }
         case CreateBankInfo:
@@ -29,8 +29,8 @@ export const bankInfoReducer = (state = initialState, action) => {
 					return {
 							...state,
 							banksInfo: [
-								...state.banksInfo.splice(0, remove_index),
-								...state.banksInfo.splice(remove_index + 1)
+								...state.banksInfo.slice(0, remove_index),
+								...state.banksInfo.slice(remove_index + 1)
 							]
 					}
         default:
@@ -42,7 +42,7 @@ const setAllBanksInfo = (banksInfo) => ({type: GetAllBankInfo, banksInfo});
 export const getAllBanksInfo = (filters) => async (dispatch) => {
 	let response = await bankInfoService.getAllBankInfo(filters);
 	if(response.status === 200){
-		dispatch(setAllBanksInfo(response.data));
+		dispatch(setAllBanksInfo(response.data.items));
 	}
 }
 
