@@ -12,8 +12,8 @@ export const Events = ({selected, setDialog, removeManual, updateHandler}) => {
 
 	return (
 		<div className={s.wrapper}>
-			<Button content="Добавить" icon={<Add32Regular/>} onClick={() => setDialog(true)}/>
-			<Button content="Изменить"  icon={<Edit32Regular/>} disabled={!selected}/>
+			<Button content="Добавить" icon={<Add32Regular/>} onClick={() => setDialog('create')}/>
+			<Button content="Изменить"  icon={<Edit32Regular/>} disabled={!selected} onClick={() => setDialog('edit')}/>
 			<Button content="Удалить" icon={<Dismiss32Regular/>} disabled={!selected} onClick={closeHandler}/>
 			<Button content="Восстановить" icon={<ArrowReset32Regular/>}/>
 			<Button content="Обновить" icon={<ArrowCounterclockwise32Regular/>} onClick={updateHandler}/>

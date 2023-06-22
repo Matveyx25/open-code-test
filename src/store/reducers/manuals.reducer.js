@@ -14,9 +14,18 @@ export const manualsReducer = (state = initialState, action) => {
 						currentManual: action.currentManual
 					}
         case UpdateManual:
+					const update_index = state.currentManual.findIndex(el => el.id === action.payload.id)		
+					const updateObj = {
+						id: action.payload.id, 
+						code: action.payload.content.code || state.currentManual[update_index].code, 
+						description: action.payload.content.description || state.currentManual[update_index].description}
 					return {
-						...state,
-						currentManual: action.currentManual
+							...state,
+							currentManual: [
+								...state.currentManual.slice(0, update_index),
+								updateObj,
+								...state.currentManual.slice(update_index + 1)
+							]
 					}
         case CreateManual:
           return {...state, currentManual: [...state.currentManual, action.manual]}
@@ -56,11 +65,11 @@ export const getManualById = (id) => async (dispatch) => {
 	}
 }
 
-const setUpdateManual = (currentManual) => ({type: UpdateManual, currentManual});
+const setUpdateManual = ({id, content}) => ({type: UpdateManual, payload: {id, content}});
 export const updateManual = (id, content) => async (dispatch) => {
 	let response = await manualsService.updateManual(id, content);
 	if(response.status === 204){
-		dispatch(setUpdateManual(content));
+		dispatch(setUpdateManual({id, content}));
 	}
 }
 
