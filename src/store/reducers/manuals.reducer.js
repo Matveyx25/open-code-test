@@ -54,9 +54,9 @@ const pushToFetchingList = (fetching) => ({type: PushToFetchingList, fetching});
 const removeFromFetchingList = (fetching) => ({type: RemoveFromFetchingList, fetching});
 
 const setCurrentManual = (currentManual) => ({type: GetManualById, currentManual});
-export const getManualById = (id) => async (dispatch) => {
+export const getManualById = (id, filters) => async (dispatch) => {
 	dispatch(pushToFetchingList('get-manual-by-id'))
-	let response = await manualsService.getManualById(id);
+	let response = await manualsService.getManualById(id, filters);
 	if(response.status === 200){
 		dispatch(setCurrentManual(response.data.items));
 		dispatch(removeFromFetchingList('get-manual-by-id'))

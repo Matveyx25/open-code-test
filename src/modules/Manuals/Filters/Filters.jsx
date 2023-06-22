@@ -5,35 +5,33 @@ import { Button } from '../../../components/Manuals/Button/Button';
 import { Checkbox } from '../../../components/Manuals/Checkbox/Checkbox';
 import { TrashCanIcon } from '@fluentui/react-icons-northstar';
 
-export const Filters = () => {
+export const Filters = ({getWithFilters}) => {
 	const formik = useFormik({
 		initialValues: {
 			code: '',
-			name: '',
-			enableDate: '',
-			isRemoved: false,
+			description: '',
+			deleted: false,
 		},
-		onSubmit: (values) => {
-			alert(JSON.stringify(values, null, 2));
+		onSubmit: () => {
+			getWithFilters(values)
 		}
 	});
 
 	const {handleReset, values, handleChange, handleSubmit} = formik
-	const {code, name, enableDate, isRemoved} = values
+	const {code, description, deleted} = values
 
 	return (
 		<div className={s.wrapper}>
-				<form>
+				<div className={s.form}>
 					<Input name="code" label='Код' value={code} onChange={handleChange}/>
-					<Input name="name" label='Наименование' value={name} onChange={handleChange}/>
-					<Input name="enableDate" label='Действует на дату' value={enableDate} onChange={handleChange}/>
-					<Checkbox name="isRemoved" label='Искать удаленные' value={isRemoved} onChange={handleChange}/>
+					<Input name="description" label='Наименование' value={description} onChange={handleChange}/>
+					<Checkbox name="deleted" label='Искать удаленные' value={deleted} onChange={handleChange}/>
 					
 					<div className={s.btns}>
 						<Button content='Найти' onClick={handleSubmit} secondary/>
 						<Button content='Сброс' icon={<TrashCanIcon/>} primary onClick={handleReset}/>
 					</div>
-				</form>
+				</div>
 		</div>
 	)
 }

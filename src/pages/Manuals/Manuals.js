@@ -6,6 +6,7 @@ import Popup from "reactjs-popup"
 import 'reactjs-popup/dist/index.css';
 import { Input } from "../../components/Manuals/Input/Input"
 import { Button } from "../../components/Manuals/Button/Button"
+import { Loader } from "@fluentui/react-northstar"
 
 export const Manuals = ({id, manuals, fetchingList, addManual, removeManual, getManualById, updateManual}) => {
 	const [selected, setSelected] = useState()
@@ -22,6 +23,10 @@ export const Manuals = ({id, manuals, fetchingList, addManual, removeManual, get
 			setManualDesc('')
 		}
 	}, [dialog])
+
+	const getWithFilters = (filters) => {
+		getManualById(id, filters)
+	}
 
 	return (
 		<>
@@ -46,13 +51,11 @@ export const Manuals = ({id, manuals, fetchingList, addManual, removeManual, get
 					}}/>
 				</div>
 			</Popup>
+			<Filters {...{getWithFilters}}/>
+			<Events {...{selected, setDialog, removeManual, updateHandler: () => getManualById(id)}}/>
 			{fetchingList.includes('get-manual-by-id') ? 
-			<p>Loading</p>
-			:<div>
-				<Filters/>
-				<Events {...{selected, setDialog, removeManual, updateHandler: () => getManualById(id)}}/>
-				<DataTable {...{manuals, selected, setSelected}}/>			
-			</div>}
+			<Loader/>
+			: <DataTable {...{manuals, selected, setSelected}}/>			}
 		</>
 	)
 }
