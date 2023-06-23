@@ -11,7 +11,7 @@ const ManualsContainer = ({manuals, getManualById, fetchingList, addManual, remo
 
 	useEffect(() => {
 		if(!id){
-			navigate('/bank-info')
+			navigate('/')
 		}
 		getManualById(id)
 	}, [])

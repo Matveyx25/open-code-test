@@ -67,7 +67,7 @@ export const Manuals = ({id, manuals, fetchingList, addManual, removeManual, get
 			<div className="back-button-wrapper">
 					<ArrowLeftFilled onClick={() => {
 						if(location.key === 'default'){
-							navigate('/bank-info')
+							navigate('/')
 						}else{
 							navigate(-1)
 						}
