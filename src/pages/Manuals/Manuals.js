@@ -44,8 +44,7 @@ export const Manuals = ({id, manuals, fetchingList, addManual, removeManual, get
 				<div className='popup-wrapper'>
 					<Input value={manualCode} onChange={(e) => setManualCode(e.currentTarget.value)} label={'Код'}/>
 					<Input value={manualDesc} onChange={(e) => setManualDesc(e.currentTarget.value)} label={'Наименование'}/>
-					<Button content="Создать" onClick={() => {
-						console.log({code: manualCode, description: manualDesc});
+					<Button content="Изменить" onClick={() => {
 						updateManual(selected, {code: manualCode, description: manualDesc})
 						setDialog(false)
 					}}/>

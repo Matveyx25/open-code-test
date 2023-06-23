@@ -4,11 +4,8 @@ export const bankInfoService = {
 	getAllBankInfo(filters){
 		return instance.get('/info', {
 		params: {
-			limit: filters?.limit, 
-			offset: filters?.offset, 
-			emessage_name: filters?.emessage_name, 
-			date_start: filters?.date_start, 
-			date_end: filters?.date_end, 
+			name: filters?.name, 
+			deleted: filters?.deleted
 		}
 	})},
 	createBankInfo(data){

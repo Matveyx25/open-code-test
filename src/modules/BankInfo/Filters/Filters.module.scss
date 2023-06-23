@@ -1,0 +1,13 @@
+.wrapper{
+	padding: 1rem;
+	border-bottom: 1px solid #f3f2f1;
+	.form{
+		display: flex;
+		gap: 1rem;
+		flex-direction: column;
+		.btns{
+			display: flex;
+			gap: 1rem;
+		}
+	}
+}
