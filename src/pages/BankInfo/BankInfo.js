@@ -6,6 +6,7 @@ import { Filters } from '../../modules/BankInfo/Filters/Filters';
 import { Events } from '../../modules/BankInfo/Events/Events';
 import { Loader } from '@fluentui/react-northstar';
 import { DataTable } from '../../modules/BankInfo/DataTable/DataTable';
+import { toast } from 'react-toastify';
 
 export const BankInfo = ({getAllBanksInfo, updateBankInfo, addBankInfo, removeBankInfo, fetchingList, banksInfo}) => {
 	const [selected, setSelected] = useState()
@@ -30,8 +31,12 @@ export const BankInfo = ({getAllBanksInfo, updateBankInfo, addBankInfo, removeBa
 				<div className='popup-wrapper'>
 					<Input value={bankInfoName} onChange={(e) => setBankInfoName(e.currentTarget.value)} label={'Наименование'}/>
 					<Button content="Создать" onClick={() => {
-						addBankInfo({name: bankInfoName})
-						setDialog(false)
+						if(bankInfoName.trim()){
+							updateBankInfo(selected, {name: bankInfoName})
+							setDialog(false)
+						}else{
+							toast.error('Введите данные корректно')
+						}
 					}}/>
 				</div>
 			</Popup>
@@ -39,8 +44,12 @@ export const BankInfo = ({getAllBanksInfo, updateBankInfo, addBankInfo, removeBa
 				<div className='popup-wrapper'>
 					<Input value={bankInfoName} onChange={(e) => setBankInfoName(e.currentTarget.value)} label={'Наименование'}/>
 					<Button content="Изменить" onClick={() => {
-						updateBankInfo(selected, {name: bankInfoName})
-						setDialog(false)
+						if(bankInfoName.trim()){
+							updateBankInfo(selected, {name: bankInfoName})
+							setDialog(false)
+						}else{
+							toast.error('Введите данные корректно')
+						}
 					}}/>
 				</div>
 			</Popup>

@@ -1,8 +1,11 @@
 import s from './DataTable.module.scss'
 import { concatTimeAndUser } from '../../../helpers/concatTimeAndUser';
 import { Table, tableHeaderCellBehavior } from '@fluentui/react-northstar';
+import { Button } from '../../../components/BankInfo/Button/Button';
+import { useNavigate } from "react-router-dom";
 
 export const DataTable = ({banksInfo, selected, setSelected}) => {
+	let navigate = useNavigate()
 
 	const items = banksInfo?.map(el => 
 		({key: el.id,
@@ -30,6 +33,7 @@ export const DataTable = ({banksInfo, selected, setSelected}) => {
 						<Table.Cell content="Наименование" accessibility={tableHeaderCellBehavior} />
 						<Table.Cell content="Создано" accessibility={tableHeaderCellBehavior} />
 						<Table.Cell content="Изменено" accessibility={tableHeaderCellBehavior} />
+						<Table.Cell content="" accessibility={tableHeaderCellBehavior} />
 					</Table.Row>
 					{items && items.map((row) => 
 					<div className={selected === row.key && s.activeRow}>
@@ -39,6 +43,7 @@ export const DataTable = ({banksInfo, selected, setSelected}) => {
 							<Table.Cell content={row.items[1]} onClick={() => selectHandler(row.key)}/>
 							<Table.Cell content={row.items[2]} onClick={() => selectHandler(row.key)}/>
 							<Table.Cell content={row.items[3]} onClick={() => selectHandler(row.key)}/>
+							<Table.Cell content={<Button content='Открыть справочник' onClick={() => navigate('/manuals/' + row.key)}/>} onClick={() => selectHandler(row.key)}/>
 						</Table.Row>
 					</div>)}
 			</Table>

@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import { bankInfoService } from "../../services/bank-info.service";
 import { CreateBankInfo, GetAllBankInfo, PushToFetchingList, RemoveBankInfo, RemoveFromFetchingList, UpdateBankInfo } from "../actions/bank-info.actions";
 
@@ -66,6 +67,7 @@ export const updateBankInfo = (id, content) => async (dispatch) => {
 	let response = await bankInfoService.updateBankInfo(id, content);
 	if(response.status === 204){
 		dispatch(setUpdateBankInfo({id, content}));
+		toast.success('Данные успешно изменены')
 	}
 }
 
@@ -74,6 +76,7 @@ export const addBankInfo = (content) => async (dispatch) => {
 	let response = await bankInfoService.createBankInfo(content);
 	if(response.status === 204){
 		dispatch(setNewBankInfo(content));
+		toast.success('Данные успешно добавлены')
 	}
 }
 
@@ -82,5 +85,6 @@ export const removeBankInfo = (id) => async (dispatch) => {
 	let response = await bankInfoService.removeBankInfo(id);
 	if(response.status === 204){
 		dispatch(deleteBankInfo(id));
+		toast.success('Данные успешно удалены')
 	}
 }

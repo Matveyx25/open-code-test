@@ -1,5 +1,6 @@
 import { CreateManual, GetManualById, PushToFetchingList, RemoveFromFetchingList, RemoveManual, UpdateManual } from '../actions/manuals.actions';
 import { manualsService } from '../../services/manuals.service';
+import { toast } from 'react-toastify';
 
 let initialState = {
 		currentManual: null,
@@ -70,6 +71,7 @@ export const updateManual = (id, content) => async (dispatch) => {
 	let response = await manualsService.updateManual(id, content);
 	if(response.status === 204){
 		dispatch(setUpdateManual({id, content}));
+		toast.success('Данные успешно изменены')
 	}
 }
 
@@ -78,6 +80,7 @@ export const addManual = (id, content) => async (dispatch) => {
 	let response = await manualsService.createManual(id, content);
 	if(response.status === 201){
 		dispatch(setNewManual(content));
+		toast.success('Данные успешно добавлены')
 	}
 }
 
@@ -86,5 +89,6 @@ export const removeManual = (id) => async (dispatch) => {
 	let response = await manualsService.removeManual(id);
 	if(response.status === 204){
 		dispatch(deleteManual(id));
+		toast.success('Данные успешно удалены')
 	}
 }

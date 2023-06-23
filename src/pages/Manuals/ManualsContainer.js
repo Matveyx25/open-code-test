@@ -2,11 +2,17 @@ import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { Manuals } from './Manuals'
 import { getManualById, addManual, removeManual, updateManual } from '../../store/reducers/manuals.reducer'
+import { useNavigate, useParams } from 'react-router-dom'
 
 const ManualsContainer = ({manuals, getManualById, fetchingList, addManual, removeManual, updateManual}) => {
-	const id = 1
+	const params = useParams()
+	const navigate = useNavigate()
+	const id = params.id
 
 	useEffect(() => {
+		if(!id){
+			navigate('/bank-info')
+		}
 		getManualById(id)
 	}, [])
 

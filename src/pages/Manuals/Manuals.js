@@ -7,6 +7,7 @@ import 'reactjs-popup/dist/index.css';
 import { Input } from "../../components/Manuals/Input/Input"
 import { Button } from "../../components/Manuals/Button/Button"
 import { Loader } from "@fluentui/react-northstar"
+import { toast } from "react-toastify"
 
 export const Manuals = ({id, manuals, fetchingList, addManual, removeManual, getManualById, updateManual}) => {
 	const [selected, setSelected] = useState()
@@ -35,8 +36,12 @@ export const Manuals = ({id, manuals, fetchingList, addManual, removeManual, get
 					<Input value={manualCode} onChange={(e) => setManualCode(e.currentTarget.value)} label={'Код'}/>
 					<Input value={manualDesc} onChange={(e) => setManualDesc(e.currentTarget.value)} label={'Наименование'}/>
 					<Button content="Создать" onClick={() => {
-						addManual(id, {code: manualCode, description: manualDesc})
-						setDialog(false)
+						if(manualCode.trim() && manualDesc.trim()){
+							addManual(id, {code: manualCode, description: manualDesc})
+							setDialog(false)
+						}else{
+							toast.error('Введите данные корректно')
+						}
 					}}/>
 				</div>
 			</Popup>
@@ -45,8 +50,12 @@ export const Manuals = ({id, manuals, fetchingList, addManual, removeManual, get
 					<Input value={manualCode} onChange={(e) => setManualCode(e.currentTarget.value)} label={'Код'}/>
 					<Input value={manualDesc} onChange={(e) => setManualDesc(e.currentTarget.value)} label={'Наименование'}/>
 					<Button content="Изменить" onClick={() => {
-						updateManual(selected, {code: manualCode, description: manualDesc})
-						setDialog(false)
+						if(manualCode.trim() && manualDesc.trim()){
+							updateManual(selected, {code: manualCode, description: manualDesc})
+							setDialog(false)
+						}else{
+							toast.error('Введите данные корректно')
+						}
 					}}/>
 				</div>
 			</Popup>
