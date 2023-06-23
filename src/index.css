@@ -21,3 +21,16 @@ code {
 	gap: 20px;
 	align-items: center;
 }
+
+.back-button-wrapper{
+	padding: 8px 20px;
+	border-bottom: 1px solid #ccc;
+}
+.back-button-wrapper svg{
+	font-size: 20px;
+	cursor: pointer;
+}
+.back-button-wrapper svg:hover{
+	transition: .4s;
+	transform: scale(1.1);
+}

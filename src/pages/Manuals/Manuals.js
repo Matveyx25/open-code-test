@@ -8,8 +8,13 @@ import { Input } from "../../components/Manuals/Input/Input"
 import { Button } from "../../components/Manuals/Button/Button"
 import { Loader } from "@fluentui/react-northstar"
 import { toast } from "react-toastify"
+import { ArrowLeftFilled } from "@fluentui/react-icons"
+import { useLocation, useNavigate } from "react-router-dom"
 
 export const Manuals = ({id, manuals, fetchingList, addManual, removeManual, getManualById, updateManual}) => {
+	const navigate = useNavigate()
+	const location = useLocation()
+	
 	const [selected, setSelected] = useState()
 	const [dialog, setDialog] = useState(false)
 	const [manualCode, setManualCode] = useState('')
@@ -59,6 +64,15 @@ export const Manuals = ({id, manuals, fetchingList, addManual, removeManual, get
 					}}/>
 				</div>
 			</Popup>
+			<div className="back-button-wrapper">
+					<ArrowLeftFilled onClick={() => {
+						if(location.key === 'default'){
+							navigate('/bank-info')
+						}else{
+							navigate(-1)
+						}
+					}}/>
+			</div>
 			<Filters {...{getWithFilters}}/>
 			<Events {...{selected, setDialog, removeManual, updateHandler: () => getManualById(id)}}/>
 			{fetchingList.includes('get-manual-by-id') ? 
