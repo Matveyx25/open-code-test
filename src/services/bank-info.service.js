@@ -16,5 +16,8 @@ export const bankInfoService = {
 	},
 	removeBankInfo(id){
 		return instance.delete(`/info/${id}`)
+	},
+	recoveryBankInfo(id) {
+		return instance.patch(`/info/${id}`)
 	}
 }

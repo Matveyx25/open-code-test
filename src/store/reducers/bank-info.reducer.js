@@ -1,6 +1,6 @@
 import { toast } from "react-toastify";
 import { bankInfoService } from "../../services/bank-info.service";
-import { CreateBankInfo, GetAllBankInfo, PushToFetchingList, RemoveBankInfo, RemoveFromFetchingList, UpdateBankInfo } from "../actions/bank-info.actions";
+import { CreateBankInfo, GetAllBankInfo, PushToFetchingList, RecoveryBankInfo, RemoveBankInfo, RemoveFromFetchingList, UpdateBankInfo } from "../actions/bank-info.actions";
 
 let initialState = {
     banksInfo: null,
@@ -33,6 +33,15 @@ export const bankInfoReducer = (state = initialState, action) => {
 							banksInfo: [
 								...state.banksInfo.slice(0, remove_index),
 								...state.banksInfo.slice(remove_index + 1)
+							]
+					}
+        case RecoveryBankInfo:
+					const recovery_index = state.banksInfo.findIndex(el => el.id == action.id)
+					return {
+							...state,
+							banksInfo: [
+								...state.banksInfo.slice(0, recovery_index),
+								...state.banksInfo.slice(recovery_index + 1)
 							]
 					}
 				case PushToFetchingList: 
@@ -86,5 +95,14 @@ export const removeBankInfo = (id) => async (dispatch) => {
 	if(response.status === 204){
 		dispatch(deleteBankInfo(id));
 		toast.success('Данные успешно удалены')
+	}
+}
+
+const setRecoveryBankInfo = (id) => ({type: RecoveryBankInfo, id});
+export const recoveryBankInfo = (id) => async (dispatch) => {
+	let response = await bankInfoService.recoveryBankInfo(id);
+	if(response.status === 204){
+		dispatch(setRecoveryBankInfo(id));
+		toast.success('Данные успешно восстановлены')
 	}
 }

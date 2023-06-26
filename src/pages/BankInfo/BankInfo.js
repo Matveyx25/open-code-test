@@ -8,10 +8,11 @@ import { Loader } from '@fluentui/react-northstar';
 import { DataTable } from '../../modules/BankInfo/DataTable/DataTable';
 import { toast } from 'react-toastify';
 
-export const BankInfo = ({getAllBanksInfo, updateBankInfo, addBankInfo, removeBankInfo, fetchingList, banksInfo}) => {
+export const BankInfo = ({getAllBanksInfo, updateBankInfo, addBankInfo, removeBankInfo, fetchingList, banksInfo, recoveryBankInfo}) => {
 	const [selected, setSelected] = useState()
 	const [dialog, setDialog] = useState(false)
 	const [bankInfoName, setBankInfoName] = useState('')
+	const [isDeleted, setIsDeleted] = useState(false)
 
 	useEffect(() => {
 		if(dialog === 'edit'){
@@ -23,6 +24,7 @@ export const BankInfo = ({getAllBanksInfo, updateBankInfo, addBankInfo, removeBa
 
 	const getWithFilters = (filters) => {
 		getAllBanksInfo(filters)
+		setSelected()
 	}
 
 	return (
@@ -32,7 +34,7 @@ export const BankInfo = ({getAllBanksInfo, updateBankInfo, addBankInfo, removeBa
 					<Input value={bankInfoName} onChange={(e) => setBankInfoName(e.currentTarget.value)} label={'Наименование'}/>
 					<Button content="Создать" onClick={() => {
 						if(bankInfoName.trim()){
-							updateBankInfo(selected, {name: bankInfoName})
+							addBankInfo({name: bankInfoName})
 							setDialog(false)
 						}else{
 							toast.error('Введите данные корректно')
@@ -53,8 +55,8 @@ export const BankInfo = ({getAllBanksInfo, updateBankInfo, addBankInfo, removeBa
 					}}/>
 				</div>
 			</Popup>
-			<Filters {...{getWithFilters}}/>
-			<Events {...{selected, setDialog, removeBankInfo, updateHandler: () => getAllBanksInfo()}}/>
+			<Filters {...{getWithFilters, setIsDeleted}}/>
+			<Events {...{selected, setDialog, removeBankInfo, updateHandler: () => getAllBanksInfo(), recoveryBankInfo, isDeleted}}/>
 			{fetchingList.includes('get-all-banks-info') ? 
 			<Loader/>
 			: <DataTable {...{banksInfo, selected, setSelected}}/>			}

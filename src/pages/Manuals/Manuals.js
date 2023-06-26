@@ -11,7 +11,7 @@ import { toast } from "react-toastify"
 import { ArrowLeftFilled } from "@fluentui/react-icons"
 import { useLocation, useNavigate } from "react-router-dom"
 
-export const Manuals = ({id, manuals, fetchingList, addManual, removeManual, getManualById, updateManual}) => {
+export const Manuals = ({id, manuals, fetchingList, addManual, removeManual, getManualById, updateManual, recoveryManual}) => {
 	const navigate = useNavigate()
 	const location = useLocation()
 	
@@ -19,6 +19,7 @@ export const Manuals = ({id, manuals, fetchingList, addManual, removeManual, get
 	const [dialog, setDialog] = useState(false)
 	const [manualCode, setManualCode] = useState('')
 	const [manualDesc, setManualDesc] = useState('')
+	const [isDeleted, setIsDeleted] = useState(false)
 
 	useEffect(() => {
 		if(dialog === 'edit'){
@@ -32,6 +33,7 @@ export const Manuals = ({id, manuals, fetchingList, addManual, removeManual, get
 
 	const getWithFilters = (filters) => {
 		getManualById(id, filters)
+		setSelected()
 	}
 
 	return (
@@ -73,8 +75,8 @@ export const Manuals = ({id, manuals, fetchingList, addManual, removeManual, get
 						}
 					}}/>
 			</div>
-			<Filters {...{getWithFilters}}/>
-			<Events {...{selected, setDialog, removeManual, updateHandler: () => getManualById(id)}}/>
+			<Filters {...{getWithFilters, setIsDeleted}}/>
+			<Events {...{selected, setDialog, removeManual, updateHandler: () => getManualById(id), isDeleted, recoveryManual}}/>
 			{fetchingList.includes('get-manual-by-id') ? 
 			<Loader/>
 			: <DataTable {...{manuals, selected, setSelected}}/>			}

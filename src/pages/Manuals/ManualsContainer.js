@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { Manuals } from './Manuals'
-import { getManualById, addManual, removeManual, updateManual } from '../../store/reducers/manuals.reducer'
+import { getManualById, addManual, removeManual, updateManual, recoveryManual } from '../../store/reducers/manuals.reducer'
 import { useNavigate, useParams } from 'react-router-dom'
 
-const ManualsContainer = ({manuals, getManualById, fetchingList, addManual, removeManual, updateManual}) => {
+const ManualsContainer = ({manuals, getManualById, fetchingList, addManual, removeManual, updateManual, recoveryManual}) => {
 	const params = useParams()
 	const navigate = useNavigate()
 	const id = params.id
@@ -23,7 +23,8 @@ const ManualsContainer = ({manuals, getManualById, fetchingList, addManual, remo
 		id, 
 		removeManual, 
 		getManualById, 
-		updateManual}}/>
+		updateManual,
+		recoveryManual}}/>
 }
 
 const mapStateToProps = (state) => ({
@@ -31,4 +32,4 @@ const mapStateToProps = (state) => ({
 	fetchingList: state.manuals.fetchingList
 })
 
-export default connect(mapStateToProps, {getManualById, addManual, removeManual, updateManual})(ManualsContainer)
+export default connect(mapStateToProps, {getManualById, addManual, removeManual, recoveryManual, updateManual})(ManualsContainer)

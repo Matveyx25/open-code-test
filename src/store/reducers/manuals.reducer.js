@@ -1,4 +1,4 @@
-import { CreateManual, GetManualById, PushToFetchingList, RemoveFromFetchingList, RemoveManual, UpdateManual } from '../actions/manuals.actions';
+import { CreateManual, GetManualById, PushToFetchingList, RecoveryManual, RemoveFromFetchingList, RemoveManual, UpdateManual } from '../actions/manuals.actions';
 import { manualsService } from '../../services/manuals.service';
 import { toast } from 'react-toastify';
 
@@ -37,6 +37,15 @@ export const manualsReducer = (state = initialState, action) => {
 							currentManual: [
 								...state.currentManual.slice(0, remove_index),
 								...state.currentManual.slice(remove_index + 1)
+							]
+					}
+        case RecoveryManual:
+					const recovery_index = state.currentManual.findIndex(el => el.id === action.id)
+					return {
+							...state,
+							currentManual: [
+								...state.currentManual.slice(0, recovery_index),
+								...state.currentManual.slice(recovery_index + 1)
 							]
 					}
 				case PushToFetchingList: 
@@ -90,5 +99,14 @@ export const removeManual = (id) => async (dispatch) => {
 	if(response.status === 204){
 		dispatch(deleteManual(id));
 		toast.success('Данные успешно удалены')
+	}
+}
+
+const setRecoveryManual = (id) => ({type: RecoveryManual, id});
+export const recoveryManual = (id) => async (dispatch) => {
+	let response = await manualsService.recoveryManual(id);
+	if(response.status === 204){
+		dispatch(setRecoveryManual(id));
+		toast.success('Данные успешно восстановлены')
 	}
 }

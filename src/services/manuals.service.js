@@ -19,5 +19,8 @@ export const manualsService = {
 	},
 	removeManual(id) {
 		return instance.delete(`/info/manuals/${id}`)
+	},
+	recoveryManual(id) {
+		return instance.patch(`/info/manuals/${id}`)
 	}
 }

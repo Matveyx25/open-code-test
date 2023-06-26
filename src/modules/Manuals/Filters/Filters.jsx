@@ -5,7 +5,7 @@ import { Button } from '../../../components/Manuals/Button/Button';
 import { Checkbox } from '../../../components/Manuals/Checkbox/Checkbox';
 import { TrashCanIcon } from '@fluentui/react-icons-northstar';
 
-export const Filters = ({getWithFilters}) => {
+export const Filters = ({getWithFilters, setIsDeleted}) => {
 	const formik = useFormik({
 		initialValues: {
 			code: '',
@@ -14,6 +14,7 @@ export const Filters = ({getWithFilters}) => {
 		},
 		onSubmit: () => {
 			getWithFilters(values)
+			setIsDeleted(values.deleted)
 		}
 	});
 

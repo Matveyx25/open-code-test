@@ -5,7 +5,7 @@ import { Button } from '../../../components/BankInfo/Button/Button';
 import { Checkbox } from '../../../components/BankInfo/Checkbox/Checkbox';
 import { TrashCanIcon } from '@fluentui/react-icons-northstar';
 
-export const Filters = ({getWithFilters}) => {
+export const Filters = ({getWithFilters, setIsDeleted}) => {
 	const formik = useFormik({
 		initialValues: {
 			name: '',
@@ -13,6 +13,7 @@ export const Filters = ({getWithFilters}) => {
 		},
 		onSubmit: () => {
 			getWithFilters(values)
+			setIsDeleted(values.deleted)
 		}
 	});
 
@@ -24,7 +25,7 @@ export const Filters = ({getWithFilters}) => {
 				<div className={s.form}>
 					<Input name="name" label='Наименование' value={name} onChange={handleChange}/>
 					<Checkbox name="deleted" label='Искать удаленные' value={deleted} onChange={handleChange}/>
-					
+
 					<div className={s.btns}>
 						<Button content='Найти' onClick={handleSubmit} secondary/>
 						<Button content='Сброс' icon={<TrashCanIcon/>} primary onClick={handleReset}/>
