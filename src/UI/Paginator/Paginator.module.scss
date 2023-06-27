@@ -1,0 +1,58 @@
+.wrapper{
+	width: fit-content;
+	display: flex;
+	flex-direction: row;
+	gap: 2rem;
+	margin: 2.5rem auto;
+	align-items: center;
+	div{
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		gap: .6rem;
+		span{
+			width: 2rem;
+			height: 2.5rem;
+			border-radius: .6rem;
+			font-family: 'Open Sans';
+			font-style: normal;
+			font-weight: 600;
+			font-size: 1rem;
+			line-height: 120%;
+			cursor: pointer;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			&:hover{
+				background: #f1f1f1;
+			}
+			&.active{
+				background: #000;
+				transform: .4s;
+				color: #fff;
+				&:hover{
+					background: #000;
+				}
+			}
+		}
+	}
+	@media screen and (max-width: 414px) {
+		gap: 1.3rem;
+	}
+}
+.prevBtn, .nextBtn{
+	padding: .4rem .4rem;
+	background: none;
+	border: 2px solid #EEEEEE;
+	border-radius: .6rem;
+	font-family: 'Open Sans';
+	font-style: normal;
+	font-weight: 600;
+	font-size: 1rem;
+	line-height: 120%;
+	color: #000000;
+	cursor: pointer;
+	&:disabled{
+		color: #888888;
+	}
+}

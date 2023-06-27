@@ -7,12 +7,19 @@ import { Events } from '../../modules/BankInfo/Events/Events';
 import { Loader } from '@fluentui/react-northstar';
 import { DataTable } from '../../modules/BankInfo/DataTable/DataTable';
 import { toast } from 'react-toastify';
+import { Paginator } from '../../UI/Paginator/Paginator';
 
-export const BankInfo = ({getAllBanksInfo, updateBankInfo, addBankInfo, removeBankInfo, fetchingList, banksInfo, recoveryBankInfo}) => {
+export const BankInfo = ({getAllBanksInfo, updateBankInfo, addBankInfo, removeBankInfo, fetchingList, banksInfo, recoveryBankInfo, pages}) => {
 	const [selected, setSelected] = useState()
 	const [dialog, setDialog] = useState(false)
 	const [bankInfoName, setBankInfoName] = useState('')
 	const [isDeleted, setIsDeleted] = useState(false)
+	const [page, setPage] = useState(1)
+	const [filters, setFilters] = useState(null)
+	
+	useEffect(() => {
+		getAllBanksInfo(filters, page)
+	}, [page])
 
 	useEffect(() => {
 		if(dialog === 'edit'){
@@ -22,8 +29,10 @@ export const BankInfo = ({getAllBanksInfo, updateBankInfo, addBankInfo, removeBa
 		}
 	}, [dialog])
 
-	const getWithFilters = (filters) => {
-		getAllBanksInfo(filters)
+	const getWithFilters = (obj) => {
+		getAllBanksInfo(obj)
+		setFilters(obj)
+		setPage(1)
 		setSelected()
 	}
 
@@ -60,6 +69,7 @@ export const BankInfo = ({getAllBanksInfo, updateBankInfo, addBankInfo, removeBa
 			{fetchingList.includes('get-all-banks-info') ? 
 			<Loader/>
 			: <DataTable {...{banksInfo, selected, setSelected}}/>			}
+			<Paginator {...{page, setPage, pages}}/>
 		</>
 	)
 }

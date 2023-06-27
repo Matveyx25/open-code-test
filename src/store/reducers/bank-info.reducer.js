@@ -1,18 +1,24 @@
 import { toast } from "react-toastify";
 import { bankInfoService } from "../../services/bank-info.service";
-import { CreateBankInfo, GetAllBankInfo, PushToFetchingList, RecoveryBankInfo, RemoveBankInfo, RemoveFromFetchingList, UpdateBankInfo } from "../actions/bank-info.actions";
+import { CreateBankInfo, GetAllBankInfo, GetBankInfoConfig, PushToFetchingList, RecoveryBankInfo, RemoveBankInfo, RemoveFromFetchingList, UpdateBankInfo } from "../actions/bank-info.actions";
 
 let initialState = {
     banksInfo: null,
-		fetchingList: []
+		fetchingList: [],
+		pages: 0
 };
 
 export const bankInfoReducer = (state = initialState, action) => {
     switch (action.type) {
         case GetAllBankInfo:
-            return {
-                ...state,
-                banksInfo: action.banksInfo
+					return {
+							...state,
+							banksInfo: action.banksInfo
+						}
+        case GetBankInfoConfig:
+					return {
+								...state,
+								pages: action.pages
             }
         case UpdateBankInfo:
 						const update_index = state.banksInfo.findIndex(el => el.id == action.payload.id)
@@ -25,7 +31,7 @@ export const bankInfoReducer = (state = initialState, action) => {
 								]
             }
         case CreateBankInfo:
-					return {...state, banksInfo: [...state.banksInfo, action.bankInfo]}
+					return {...state, banksInfo: [...state.banksInfo, action.content]}
         case RemoveBankInfo:
 					const remove_index = state.banksInfo.findIndex(el => el.id == action.id)
 					return {
@@ -60,11 +66,13 @@ const pushToFetchingList = (fetching) => ({type: PushToFetchingList, fetching});
 const removeFromFetchingList = (fetching) => ({type: RemoveFromFetchingList, fetching});
 
 const setAllBanksInfo = (banksInfo) => ({type: GetAllBankInfo, banksInfo});
-export const getAllBanksInfo = (filters) => async (dispatch) => {
+const setBanksInfoConfig = (pages) => ({type: GetBankInfoConfig, pages});
+export const getAllBanksInfo = (filters, page) => async (dispatch) => {
 	dispatch(pushToFetchingList('get-all-banks-info'))
-	let response = await bankInfoService.getAllBankInfo(filters);
+	let response = await bankInfoService.getAllBankInfo(filters, page);
 	if(response.status === 200){
 		dispatch(setAllBanksInfo(response.data.items));
+		dispatch(setBanksInfoConfig(response.data.config.countOfPages));
 		dispatch(removeFromFetchingList('get-all-banks-info'))
 	}else{
 		dispatch(removeFromFetchingList('get-all-banks-info'))
@@ -80,10 +88,10 @@ export const updateBankInfo = (id, content) => async (dispatch) => {
 	}
 }
 
-const setNewBankInfo = (bankInfo) => ({type: CreateBankInfo, bankInfo});
+const setNewBankInfo = (content) => ({type: CreateBankInfo, content});
 export const addBankInfo = (content) => async (dispatch) => {
 	let response = await bankInfoService.createBankInfo(content);
-	if(response.status === 204){
+	if(response.status === 201){
 		dispatch(setNewBankInfo(content));
 		toast.success('Данные успешно добавлены')
 	}
