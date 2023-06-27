@@ -1,10 +1,11 @@
-import { CreateManual, GetManualById, PushToFetchingList, RecoveryManual, RemoveFromFetchingList, RemoveManual, UpdateManual } from '../actions/manuals.actions';
+import { CreateManual, GetManualById, GetManualConfig, PushToFetchingList, RecoveryManual, RemoveFromFetchingList, RemoveManual, UpdateManual } from '../actions/manuals.actions';
 import { manualsService } from '../../services/manuals.service';
 import { toast } from 'react-toastify';
 
 let initialState = {
 		currentManual: null,
 		fetchingList: [],
+		pages: 0
 };
 
 export const manualsReducer = (state = initialState, action) => {
@@ -13,6 +14,11 @@ export const manualsReducer = (state = initialState, action) => {
 					return {
 						...state,
 						currentManual: action.currentManual
+					}
+        case GetManualConfig:
+					return {
+						...state,
+						pages: action.pages
 					}
         case UpdateManual:
 					const update_index = state.currentManual.findIndex(el => el.id === action.payload.id)		
@@ -63,12 +69,14 @@ export const manualsReducer = (state = initialState, action) => {
 const pushToFetchingList = (fetching) => ({type: PushToFetchingList, fetching});
 const removeFromFetchingList = (fetching) => ({type: RemoveFromFetchingList, fetching});
 
+const setManualConfig = (pages) => ({type: GetManualConfig, pages});
 const setCurrentManual = (currentManual) => ({type: GetManualById, currentManual});
-export const getManualById = (id, filters) => async (dispatch) => {
+export const getManualById = (id, filters, page) => async (dispatch) => {
 	dispatch(pushToFetchingList('get-manual-by-id'))
-	let response = await manualsService.getManualById(id, filters);
+	let response = await manualsService.getManualById(id, filters, page);
 	if(response.status === 200){
 		dispatch(setCurrentManual(response.data.items));
+		dispatch(setManualConfig(response.data.config.countOfPages));
 		dispatch(removeFromFetchingList('get-manual-by-id'))
 	}else{
 		dispatch(removeFromFetchingList('get-manual-by-id'))

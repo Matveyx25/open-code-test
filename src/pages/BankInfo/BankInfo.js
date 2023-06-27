@@ -30,7 +30,7 @@ export const BankInfo = ({getAllBanksInfo, updateBankInfo, addBankInfo, removeBa
 	}, [dialog])
 
 	const getWithFilters = (obj) => {
-		getAllBanksInfo(obj)
+		getAllBanksInfo(obj, 1)
 		setFilters(obj)
 		setPage(1)
 		setSelected()

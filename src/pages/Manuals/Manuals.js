@@ -10,8 +10,9 @@ import { Loader } from "@fluentui/react-northstar"
 import { toast } from "react-toastify"
 import { ArrowLeftFilled } from "@fluentui/react-icons"
 import { useLocation, useNavigate } from "react-router-dom"
+import { Paginator } from "../../UI/Paginator/Paginator"
 
-export const Manuals = ({id, manuals, fetchingList, addManual, removeManual, getManualById, updateManual, recoveryManual}) => {
+export const Manuals = ({id, manuals, fetchingList, addManual, removeManual, getManualById, updateManual, recoveryManual, pages}) => {
 	const navigate = useNavigate()
 	const location = useLocation()
 	
@@ -20,6 +21,12 @@ export const Manuals = ({id, manuals, fetchingList, addManual, removeManual, get
 	const [manualCode, setManualCode] = useState('')
 	const [manualDesc, setManualDesc] = useState('')
 	const [isDeleted, setIsDeleted] = useState(false)
+	const [page, setPage] = useState(1)
+	const [filters, setFilters] = useState(null)
+
+	useEffect(() => {
+		getManualById(id, filters, page)
+	}, [page])
 
 	useEffect(() => {
 		if(dialog === 'edit'){
@@ -31,8 +38,10 @@ export const Manuals = ({id, manuals, fetchingList, addManual, removeManual, get
 		}
 	}, [dialog])
 
-	const getWithFilters = (filters) => {
-		getManualById(id, filters)
+	const getWithFilters = (obj) => {
+		getManualById(id, obj, 1)
+		setPage(1)
+		setFilters(obj)
 		setSelected()
 	}
 
@@ -79,7 +88,8 @@ export const Manuals = ({id, manuals, fetchingList, addManual, removeManual, get
 			<Events {...{selected, setDialog, removeManual, updateHandler: () => getManualById(id), isDeleted, recoveryManual}}/>
 			{fetchingList.includes('get-manual-by-id') ? 
 			<Loader/>
-			: <DataTable {...{manuals, selected, setSelected}}/>			}
+			: <DataTable {...{manuals, selected, setSelected}}/>}
+			<Paginator {...{pages, page, setPage}}/>
 		</>
 	)
 }

@@ -1,14 +1,13 @@
 import { instance } from "./axios.config";
 
 export const manualsService = {
-	getManualById(id, filters) {
+	getManualById(id, filters, page = 1) {
 		return instance.get(`/info/${id}/manuals`, {
 		params: {
-			limit: filters?.limit,
-			offset: filters?.offset,
 			code: filters?.code,
 			description: filters?.description,
-			deleted: filters?.deleted
+			deleted: filters?.deleted,
+			page
 		}
 	})},
 	createManual(id, data) {
