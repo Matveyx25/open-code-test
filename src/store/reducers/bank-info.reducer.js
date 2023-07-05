@@ -67,6 +67,7 @@ const removeFromFetchingList = (fetching) => ({type: RemoveFromFetchingList, fet
 
 const setAllBanksInfo = (banksInfo) => ({type: GetAllBankInfo, banksInfo});
 const setBanksInfoConfig = (pages) => ({type: GetBankInfoConfig, pages});
+
 export const getAllBanksInfo = (filters, page) => async (dispatch) => {
 	dispatch(pushToFetchingList('get-all-banks-info'))
 	let response = await bankInfoService.getAllBankInfo(filters, page);

@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import {Navigate, Route, Routes} from "react-router-dom"
+import { Route, Routes} from "react-router-dom"
 import { compose } from "redux";
 import ManualsContainer from "./pages/Manuals/ManualsContainer";
 import BankInfoContainer from './pages/BankInfo/BankInfoContainer';
@@ -17,6 +17,7 @@ function App() {
 						<Routes>
 							<Route path="/" element={<BankInfoContainer/>}/>
 							<Route path='/manuals/:id' element={<ManualsContainer/>}/>
+							<Route path='/messages/' element={<MessagesContainer/>}/>
 							<Route path="*" element={<div className="error__not-found">404 NOT FOUND</div>} />
 						</Routes>
 					</div>

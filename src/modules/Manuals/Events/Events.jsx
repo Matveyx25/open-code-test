@@ -1,4 +1,4 @@
-import { Button } from '../../../components/Manuals/Button/Button'
+import { Button } from '../../../components/UI/Button/Button'
 import s from './Events.module.scss'
 import { Add32Regular, ArrowCounterclockwise32Regular, ArrowReset32Regular, Dismiss32Regular, Edit32Regular } from '@fluentui/react-icons'
 

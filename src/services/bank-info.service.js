@@ -3,11 +3,15 @@ import { instance } from "./axios.config";
 export const bankInfoService = {
 	getAllBankInfo(filters, page = 1){
 		return instance.get('/info', {
+		auth: {
+			username: 'admin',
+			password: 'admin'
+		},
 		params: {
 			name: filters?.name, 
 			deleted: filters?.deleted,
 			page
-		}
+		},
 	})},
 	createBankInfo(data){
 		return instance.post(`/info`, data)

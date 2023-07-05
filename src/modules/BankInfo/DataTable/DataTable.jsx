@@ -1,7 +1,7 @@
 import s from './DataTable.module.scss'
 import { concatTimeAndUser } from '../../../helpers/concatTimeAndUser';
 import { Table, tableHeaderCellBehavior } from '@fluentui/react-northstar';
-import { Button } from '../../../components/BankInfo/Button/Button';
+import { Button } from '../../../components/UI/Button/Button';
 import { useNavigate } from "react-router-dom";
 
 export const DataTable = ({banksInfo, selected, setSelected}) => {

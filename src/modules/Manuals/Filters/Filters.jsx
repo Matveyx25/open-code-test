@@ -1,8 +1,8 @@
 import { useFormik } from 'formik'
 import s from './Filters.module.scss'
-import { Input } from '../../../components/Manuals/Input/Input';
-import { Button } from '../../../components/Manuals/Button/Button';
-import { Checkbox } from '../../../components/Manuals/Checkbox/Checkbox';
+import { Input } from '../../../components/UI/Input/Input';
+import { Button } from '../../../components/UI/Button/Button';
+import { Checkbox } from '../../../components/UI/Checkbox/Checkbox';
 import { TrashCanIcon } from '@fluentui/react-icons-northstar';
 
 export const Filters = ({getWithFilters, setIsDeleted}) => {

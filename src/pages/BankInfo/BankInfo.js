@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import Popup from 'reactjs-popup'
-import { Input } from '../../components/BankInfo/Input/Input';
-import { Button } from '../../components/BankInfo/Button/Button';
+import { Input } from '../../components/UI/Input/Input';
+import { Button } from '../../components/UI/Button/Button';
 import { Filters } from '../../modules/BankInfo/Filters/Filters';
 import { Events } from '../../modules/BankInfo/Events/Events';
 import { Loader } from '@fluentui/react-northstar';
 import { DataTable } from '../../modules/BankInfo/DataTable/DataTable';
 import { toast } from 'react-toastify';
-import { Paginator } from '../../UI/Paginator/Paginator';
+import { Paginator } from '../../components/UI/Paginator/Paginator';
 
 export const BankInfo = ({getAllBanksInfo, updateBankInfo, addBankInfo, removeBankInfo, fetchingList, banksInfo, recoveryBankInfo, pages}) => {
 	const [selected, setSelected] = useState()

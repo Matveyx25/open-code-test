@@ -8,7 +8,7 @@ import { TrashCanIcon } from '@fluentui/react-icons-northstar';
 export const Filters = ({getWithFilters, setIsDeleted}) => {
 	const formik = useFormik({
 		initialValues: {
-			name: '',
+			emessage_name: '',
 			deleted: false,
 		},
 		onSubmit: () => {
@@ -18,12 +18,12 @@ export const Filters = ({getWithFilters, setIsDeleted}) => {
 	});
 
 	const {handleReset, values, handleChange, handleSubmit} = formik
-	const {name, deleted} = values
+	const {emessage_name, deleted} = values
 
 	return (
 		<div className={s.wrapper}>
 				<div className={s.form}>
-					<Input name="name" label='Наименование' value={name} onChange={handleChange}/>
+					<Input name="emessage_name" label='Наименование' value={emessage_name} onChange={handleChange}/>
 					<Checkbox name="deleted" label='Искать удаленные' value={deleted} onChange={handleChange}/>
 
 					<div className={s.btns}>

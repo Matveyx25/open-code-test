@@ -4,13 +4,13 @@ import { Events } from "../../modules/Manuals/Events/Events"
 import { Filters } from "../../modules/Manuals/Filters/Filters"
 import Popup from "reactjs-popup"
 import 'reactjs-popup/dist/index.css';
-import { Input } from "../../components/Manuals/Input/Input"
-import { Button } from "../../components/Manuals/Button/Button"
+import { Input } from "../../components/UI/Input/Input"
+import { Button } from "../../components/UI/Button/Button"
 import { Loader } from "@fluentui/react-northstar"
 import { toast } from "react-toastify"
 import { ArrowLeftFilled } from "@fluentui/react-icons"
 import { useLocation, useNavigate } from "react-router-dom"
-import { Paginator } from "../../UI/Paginator/Paginator"
+import { Paginator } from "../../components/UI/Paginator/Paginator"
 
 export const Manuals = ({id, manuals, fetchingList, addManual, removeManual, getManualById, updateManual, recoveryManual, pages}) => {
 	const navigate = useNavigate()
