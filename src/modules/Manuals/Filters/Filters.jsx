@@ -30,7 +30,10 @@ export const Filters = ({getWithFilters, setIsDeleted}) => {
 					
 					<div className={s.btns}>
 						<Button content='Найти' onClick={handleSubmit} secondary/>
-						<Button content='Сброс' icon={<TrashCanIcon/>} primary onClick={handleReset}/>
+						<Button content='Сброс' icon={<TrashCanIcon/>} primary onClick={() => {
+							handleReset()
+							handleSubmit()
+						}}/>
 					</div>
 				</div>
 		</div>

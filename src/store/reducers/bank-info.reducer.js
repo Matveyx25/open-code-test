@@ -93,7 +93,7 @@ const setNewBankInfo = (content) => ({type: CreateBankInfo, content});
 export const addBankInfo = (content) => async (dispatch) => {
 	let response = await bankInfoService.createBankInfo(content);
 	if(response.status === 201){
-		dispatch(setNewBankInfo(content));
+		dispatch(setNewBankInfo({id: response.data, ...content}));
 		toast.success('Данные успешно добавлены')
 	}
 }

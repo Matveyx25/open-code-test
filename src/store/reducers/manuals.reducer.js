@@ -96,7 +96,7 @@ const setNewManual = (manual) => ({type: CreateManual, manual});
 export const addManual = (id, content) => async (dispatch) => {
 	let response = await manualsService.createManual(id, content);
 	if(response.status === 201){
-		dispatch(setNewManual(content));
+		dispatch(setNewManual({id: response.data, ...content}));
 		toast.success('Данные успешно добавлены')
 	}
 }
