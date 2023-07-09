@@ -34,3 +34,23 @@ code {
 	transition: .4s;
 	transform: scale(1.1);
 }
+
+.dropzone{
+	width: 300px;
+	height: 150px;
+	border-radius: 8px;
+	border: 3px dashed #cccccc7f;
+	padding: 40px;
+	box-sizing: border-box;
+	text-align: center;
+	font-size: 16px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	outline: none;
+	cursor: pointer;
+	&:hover{
+		transition: .4s;
+		border-color: #ccc;
+	}
+}

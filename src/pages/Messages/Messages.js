@@ -8,6 +8,7 @@ import { Loader } from '@fluentui/react-northstar';
 import { DataTable } from '../../modules/Messages/DataTable/DataTable';
 import { toast } from 'react-toastify';
 import { Paginator } from '../../components/UI/Paginator/Paginator';
+import Dropzone, { useDropzone } from 'react-dropzone';
 
 export const Messages = ({getAllMessages, updateMessageName, addMessage, removeMessage, fetchingList, messages, recoveryMessage, pages}) => {
 	const [selected, setSelected] = useState()
@@ -17,6 +18,18 @@ export const Messages = ({getAllMessages, updateMessageName, addMessage, removeM
 	const [isDeleted, setIsDeleted] = useState(false)
 	const [page, setPage] = useState(1)
 	const [filters, setFilters] = useState(null)
+	const [files, setFiles] = useState([]);
+	const {getRootProps, getInputProps} = useDropzone({
+		maxFiles: 1,
+    accept: {
+			'text/xml': ['.xml']
+		},
+    onDrop: acceptedFiles => {
+      setFiles(acceptedFiles.map(file => Object.assign(file, {
+        preview: URL.createObjectURL(file)
+      })));
+    }
+  });
 	
 	useEffect(() => {
 		getAllMessages(filters, page)
@@ -41,10 +54,13 @@ export const Messages = ({getAllMessages, updateMessageName, addMessage, removeM
 		<>
 			<Popup open={dialog == 'create'} onClose={() => setDialog(false)} position="right center">
 				<div className='popup-wrapper'>
-					<Input value={messageFile} onChange={setMessageFile} label={'Файл'} type='file'/>
+					<div {...getRootProps({className: 'dropzone'})}>
+						<input {...getInputProps()} />
+						<p>{files[0]?.name || "Drag 'n' drop some files here, or click to select files"}</p>
+					</div>
 					<Button content="Создать" onClick={() => {
-						if(messageFile){
-							addMessage(messageFile)
+						if(files){
+							addMessage(files[0])
 							setDialog(false)
 						}else{
 							toast.error('Введите данные корректно')
