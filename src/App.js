@@ -4,24 +4,23 @@ import { compose } from "redux";
 import ManualsContainer from "./pages/Manuals/ManualsContainer";
 import BankInfoContainer from './pages/BankInfo/BankInfoContainer';
 import MessagesContainer from './pages/Messages/MessagesContainer';
-import { Provider, teamsTheme } from "@fluentui/react-northstar";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import { HomePage } from "./pages/Home/HomePage";
 
 function App() {
   return (
     <div>
 			<ToastContainer/>
-			<Provider theme={teamsTheme}>
-					<div className="container">
-						<Routes>
-							<Route path="/" element={<BankInfoContainer/>}/>
-							<Route path='/manuals/:id' element={<ManualsContainer/>}/>
-							<Route path='/messages/' element={<MessagesContainer/>}/>
-							<Route path="*" element={<div className="error__not-found">404 NOT FOUND</div>} />
-						</Routes>
-					</div>
-				</Provider>
+				<div className="container">
+					<Routes>
+						<Route path="/" element={<HomePage/>}/>
+						<Route path="/bank-info" element={<BankInfoContainer/>}/>
+						<Route path='/manuals/:id' element={<ManualsContainer/>}/>
+						<Route path='/messages/' element={<MessagesContainer/>}/>
+						<Route path="*" element={<div className="error__not-found">404 NOT FOUND</div>} />
+					</Routes>
+				</div>
       </div>
   );
 }

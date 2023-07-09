@@ -9,10 +9,11 @@ import { DataTable } from '../../modules/Messages/DataTable/DataTable';
 import { toast } from 'react-toastify';
 import { Paginator } from '../../components/UI/Paginator/Paginator';
 
-export const Messages = ({getAllMessages, updateMessage, addMessage, removeMessage, fetchingList, messages, recoveryMessage, pages}) => {
+export const Messages = ({getAllMessages, updateMessageName, addMessage, removeMessage, fetchingList, messages, recoveryMessage, pages}) => {
 	const [selected, setSelected] = useState()
 	const [dialog, setDialog] = useState(false)
 	const [messageName, setMessageName] = useState('')
+	const [messageFile, setMessageFile] = useState()
 	const [isDeleted, setIsDeleted] = useState(false)
 	const [page, setPage] = useState(1)
 	const [filters, setFilters] = useState(null)
@@ -40,10 +41,10 @@ export const Messages = ({getAllMessages, updateMessage, addMessage, removeMessa
 		<>
 			<Popup open={dialog == 'create'} onClose={() => setDialog(false)} position="right center">
 				<div className='popup-wrapper'>
-					<Input value={messageName} onChange={(e) => setMessageName(e.currentTarget.value)} label={'Наименование'}/>
+					<Input value={messageFile} onChange={setMessageFile} label={'Файл'} type='file'/>
 					<Button content="Создать" onClick={() => {
-						if(messageName.trim()){
-							addMessage({name: messageName})
+						if(messageFile){
+							addMessage(messageFile)
 							setDialog(false)
 						}else{
 							toast.error('Введите данные корректно')
@@ -56,7 +57,7 @@ export const Messages = ({getAllMessages, updateMessage, addMessage, removeMessa
 					<Input value={messageName} onChange={(e) => setMessageName(e.currentTarget.value)} label={'Наименование'}/>
 					<Button content="Изменить" onClick={() => {
 						if(messageName.trim()){
-							updateMessage(selected, {name: messageName})
+							updateMessageName(selected, {name: messageName})
 							setDialog(false)
 						}else{
 							toast.error('Введите данные корректно')

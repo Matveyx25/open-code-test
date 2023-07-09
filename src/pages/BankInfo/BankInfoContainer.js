@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import { BankInfo } from './BankInfo'
 import { getAllBanksInfo, updateBankInfo, addBankInfo, removeBankInfo, recoveryBankInfo } from '../../store/reducers/bank-info.reducer'

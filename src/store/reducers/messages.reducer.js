@@ -1,4 +1,4 @@
-import { CreateMessage, GetAllMessages, GetMessageByID, GetMessagesConfig, PushToFetchingList, RecoveryMessage, RemoveFromFetchingList, RemoveMessage, UpdateMessage, UpdateMessageName } from "../actions/messages.actions";
+import { CreateMessage, GetAllMessages, GetMessageByID, GetMessagesConfig, PushToFetchingList, RecoveryMessage, RemoveFromFetchingList, RemoveMessage, UpdateMessageName } from "../actions/messages.actions";
 import { messagesService } from '../../services/messages.service';
 import { toast } from "react-toastify";
 
@@ -30,7 +30,7 @@ export const messagesReducer = (state = initialState, action) => {
         case CreateMessage:
           return {
 						...state,
-						messages: [...state.messages, action.message]
+						// messages: [...state.messages, action.message]
 					}
         case RemoveMessage:
 					const remove_index = state.messages.findIndex(el => el.id == action.id)
@@ -41,8 +41,6 @@ export const messagesReducer = (state = initialState, action) => {
 								...state.messages.splice(remove_index + 1)
 							]
 					}
-        case UpdateMessage:
-					return state;
 				case UpdateMessageName:
 					const update_index = state.messages.findIndex(el => el.id == action.payload.id)
 					return {
@@ -102,15 +100,6 @@ export const getAllMessages = (filters, page) => async (dispatch) => {
 		dispatch(removeFromFetchingList('get-all-messages'))
 	}else{
 		dispatch(removeFromFetchingList('get-all-messages'))
-	}
-}
-
-const setUpdateMessage = ({id, content}) => ({type: UpdateMessage, payload: {id, content}});
-export const updateMessage = (id, content) => async (dispatch) => {
-	let response = await messagesService.updateMessage(id, content);
-	if(response.status === 204){
-		dispatch(setUpdateMessage({id, content}));
-		toast.success('Данные успешно изменены')
 	}
 }
 

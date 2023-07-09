@@ -21,13 +21,13 @@ export const messagesService = {
 		})
 	},
 	createMessage(data) {
-		return instance.post(`/emessages/xml`, data, {headers: {'Content-Type': 'application/xml'}})
+		let formData = new FormData();
+		formData.append("file", data);
+
+		return instance.post(`/emessages/xml`, formData, {headers: {'Content-Type': 'multipart/form-data'}})
 	},
 	updateMessageName(id, name) {
 		return instance.put(`/emessages/${id}`, {name})
-	},
-	updateMessage(id, data) {
-		return instance.put(`/emessages/${id}/xml`, data, {headers: {'Content-Type': 'application/xml'}})
 	},
 	removeMessage(id) {
 		return instance.delete(`/emessages/${id}`)

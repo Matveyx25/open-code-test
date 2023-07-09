@@ -1,0 +1,27 @@
+.flex{
+	max-width: 600px;
+	margin: 0 auto;
+	margin-top: 60px;
+	display: flex;
+	flex-direction: row;
+	gap: 16px;
+	div{
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 200px;
+		width: 50%;
+		border: 1px solid #ccc;
+		border-radius: 8px;
+		font-size: 24px;
+		text-align: center;
+		gap: 8px;
+		transition: .4s;
+		cursor: pointer;
+		&:hover{
+			border-color: #345d2a;
+			box-shadow: 0 0 32px 10px #9bfb837e inset;
+			color: #345d2a;
+		}
+	}
+}

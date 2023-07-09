@@ -6,14 +6,17 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { store } from './store/store';
+import { Provider as Fluent, teamsTheme } from "@fluentui/react-northstar";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
 		<BrowserRouter>
-			<Provider store={store}>
-				<AppContainer/>
-			</Provider>
+			<Fluent theme={teamsTheme}>
+				<Provider store={store}>
+					<AppContainer/>
+				</Provider>
+			</Fluent>
 		</BrowserRouter>
   </React.StrictMode>
 );
