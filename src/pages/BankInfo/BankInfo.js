@@ -8,6 +8,8 @@ import { Loader } from '@fluentui/react-northstar';
 import { DataTable } from '../../modules/BankInfo/DataTable/DataTable';
 import { toast } from 'react-toastify';
 import { Paginator } from '../../components/UI/Paginator/Paginator';
+import { HomeRegular } from '@fluentui/react-icons';
+import { useNavigate } from 'react-router-dom';
 
 export const BankInfo = ({getAllBanksInfo, updateBankInfo, addBankInfo, removeBankInfo, fetchingList, banksInfo, recoveryBankInfo, pages}) => {
 	const [selected, setSelected] = useState()
@@ -16,6 +18,8 @@ export const BankInfo = ({getAllBanksInfo, updateBankInfo, addBankInfo, removeBa
 	const [isDeleted, setIsDeleted] = useState(false)
 	const [page, setPage] = useState(1)
 	const [filters, setFilters] = useState(null)
+
+	const navigate = useNavigate()
 	
 	useEffect(() => {
 		getAllBanksInfo(filters, page)
@@ -64,11 +68,14 @@ export const BankInfo = ({getAllBanksInfo, updateBankInfo, addBankInfo, removeBa
 					}}/>
 				</div>
 			</Popup>
+			<div className="back-button-wrapper">
+					<HomeRegular onClick={() => navigate('/')}/>
+			</div>
 			<Filters {...{getWithFilters, setIsDeleted}}/>
 			<Events {...{selected, setDialog, removeBankInfo, updateHandler: () => getAllBanksInfo(), recoveryBankInfo, isDeleted}}/>
 			{fetchingList.includes('get-all-banks-info') ? 
 			<Loader/>
-			: <DataTable {...{banksInfo, selected, setSelected}}/>			}
+			: <DataTable {...{banksInfo, selected, setSelected}}/>}
 			<Paginator {...{page, setPage, pages}}/>
 		</>
 	)

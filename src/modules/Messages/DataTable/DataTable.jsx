@@ -1,23 +1,27 @@
 import s from './DataTable.module.scss'
 import { concatTimeAndUser } from '../../../helpers/concatTimeAndUser';
 import { Table, tableHeaderCellBehavior } from '@fluentui/react-northstar';
+import { useEffect } from 'react';
 
 export const DataTable = ({messages, selected, setSelected}) => {
 	const items = messages?.map(el => 
 	({key: el.id,
 		items: [ 
 			el.id, 
-			el.eMessageName, 
-			el.fileUrl,
+			el.emessageName, 
 			concatTimeAndUser(el.createDateTime, el.createdBy),
 			concatTimeAndUser(el.edDate, el.edAuthor + el.edNo + ''), 
 			concatTimeAndUser(el.changeDateTime, el.changedBy),
 			el.infoTypeCode,
 			el.businessDay,
-			el.creationDateTime,
+			el.creationTime,
 		] 
 		})
 	)
+
+	useEffect(() => {
+		console.log(messages);
+	}, [messages])
 
 	const selectHandler = (id) => {			
 		if(selected === id){
@@ -33,7 +37,6 @@ export const DataTable = ({messages, selected, setSelected}) => {
 					<Table.Row header>
 						<Table.Cell content="" accessibility={tableHeaderCellBehavior} style={{maxWidth: 30}}/>
 						<Table.Cell content="Наименование" accessibility={tableHeaderCellBehavior} />
-						<Table.Cell content="Файл" accessibility={tableHeaderCellBehavior} />
 						<Table.Cell content="Создан" accessibility={tableHeaderCellBehavior} />
 						<Table.Cell content="Составлен ЭС" accessibility={tableHeaderCellBehavior} />
 						<Table.Cell content="Изменен" accessibility={tableHeaderCellBehavior} />
@@ -53,7 +56,6 @@ export const DataTable = ({messages, selected, setSelected}) => {
 							<Table.Cell content={row.items[5]} onClick={() => selectHandler(row.key)}/>
 							<Table.Cell content={row.items[6]} onClick={() => selectHandler(row.key)}/>
 							<Table.Cell content={row.items[7]} onClick={() => selectHandler(row.key)}/>
-							<Table.Cell content={row.items[8]} onClick={() => selectHandler(row.key)}/>
 						</Table.Row>
 					</div>)}
 			</Table>

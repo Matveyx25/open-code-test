@@ -43,7 +43,7 @@ export const DataTable = ({banksInfo, selected, setSelected}) => {
 							<Table.Cell content={row.items[1]} onClick={() => selectHandler(row.key)}/>
 							<Table.Cell content={row.items[2]} onClick={() => selectHandler(row.key)}/>
 							<Table.Cell content={row.items[3]} onClick={() => selectHandler(row.key)}/>
-							<Table.Cell content={<Button content='Открыть справочник' onClick={() => navigate('/manuals/' + row.key)}/>} onClick={() => selectHandler(row.key)}/>
+							<Table.Cell content={<Button content='Открыть справочник' onClick={() => navigate('/manuals/' + row.key, { state: { name: row.items[1] }})}/>} onClick={() => selectHandler(row.key)}/>
 						</Table.Row>
 					</div>)}
 			</Table>

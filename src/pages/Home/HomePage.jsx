@@ -10,11 +10,11 @@ export const HomePage = () => {
 		<div className={s.flex}>
 			<div onClick={() => navigate('/bank-info')}>
 				<BuildingBankRegular/>
-				Bank Info
+				Справочники
 			</div>
 			<div onClick={() => navigate('/messages')}>
 				<CommentRegular/>
-				EMessages
+				Эл.Сообщения
 			</div>
 		</div>
 	)

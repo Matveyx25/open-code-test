@@ -9,12 +9,13 @@ import { DataTable } from '../../modules/Messages/DataTable/DataTable';
 import { toast } from 'react-toastify';
 import { Paginator } from '../../components/UI/Paginator/Paginator';
 import Dropzone, { useDropzone } from 'react-dropzone';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { HomeRegular } from '@fluentui/react-icons';
 
 export const Messages = ({getAllMessages, updateMessageName, addMessage, removeMessage, fetchingList, messages, recoveryMessage, pages}) => {
 	const [selected, setSelected] = useState()
 	const [dialog, setDialog] = useState(false)
 	const [messageName, setMessageName] = useState('')
-	const [messageFile, setMessageFile] = useState()
 	const [isDeleted, setIsDeleted] = useState(false)
 	const [page, setPage] = useState(1)
 	const [filters, setFilters] = useState(null)
@@ -30,6 +31,8 @@ export const Messages = ({getAllMessages, updateMessageName, addMessage, removeM
       })));
     }
   });
+
+	const navigate = useNavigate()
 	
 	useEffect(() => {
 		getAllMessages(filters, page)
@@ -73,7 +76,7 @@ export const Messages = ({getAllMessages, updateMessageName, addMessage, removeM
 					<Input value={messageName} onChange={(e) => setMessageName(e.currentTarget.value)} label={'Наименование'}/>
 					<Button content="Изменить" onClick={() => {
 						if(messageName.trim()){
-							updateMessageName(selected, {name: messageName})
+							updateMessageName(selected, messageName)
 							setDialog(false)
 						}else{
 							toast.error('Введите данные корректно')
@@ -81,6 +84,9 @@ export const Messages = ({getAllMessages, updateMessageName, addMessage, removeM
 					}}/>
 				</div>
 			</Popup>
+			<div className="back-button-wrapper">
+					<HomeRegular onClick={() => navigate('/')}/>
+			</div>
 			<Filters {...{getWithFilters, setIsDeleted}}/>
 			<Events {...{selected, setDialog, removeMessage, updateHandler: () => getAllMessages(), recoveryMessage, isDeleted}}/>
 			{fetchingList.includes('get-all-messages') ? 

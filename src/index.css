@@ -25,6 +25,10 @@ code {
 .back-button-wrapper{
 	padding: 8px 20px;
 	border-bottom: 1px solid #ccc;
+	display: flex;
+	flex-direction: row;
+	gap: 16px;
+	align-items: center;
 }
 .back-button-wrapper svg{
 	font-size: 20px;

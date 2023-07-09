@@ -38,6 +38,9 @@ export const Manuals = ({id, manuals, fetchingList, addManual, removeManual, get
 		}
 	}, [dialog])
 
+	const { state } = useLocation();
+	const { name } = state; // Read values passed on state
+
 	const getWithFilters = (obj) => {
 		getManualById(id, obj, 1)
 		setPage(1)
@@ -83,6 +86,7 @@ export const Manuals = ({id, manuals, fetchingList, addManual, removeManual, get
 							navigate(-1)
 						}
 					}}/>
+					{name && <p>{name}</p>}
 			</div>
 			<Filters {...{getWithFilters, setIsDeleted}}/>
 			<Events {...{selected, setDialog, removeManual, updateHandler: () => getManualById(id), isDeleted, recoveryManual}}/>

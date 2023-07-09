@@ -45,9 +45,9 @@ export const messagesReducer = (state = initialState, action) => {
 					const update_index = state.messages.findIndex(el => el.id == action.payload.id)
 					return {
 							...state,
-							banksInfo: [
+							messages: [
 								...state.messages.slice(0, update_index),
-								{id: action.payload.id, name: action.payload.name, ...state.messages[update_index]},
+								{...state.messages[update_index], emessageName: action.payload.content},
 								...state.messages.slice(update_index + 1)
 							]
 					}
@@ -103,11 +103,11 @@ export const getAllMessages = (filters, page) => async (dispatch) => {
 	}
 }
 
-const setUpdateMessageName = ({id, name}) => ({type: UpdateMessageName, payload: {id, name}});
+const setUpdateMessageName = ({id, content}) => ({type: UpdateMessageName, payload: {id, content}});
 export const updateMessageName = (id, name) => async (dispatch) => {
-	let response = await messagesService.updateMessage(id, name);
+	let response = await messagesService.updateMessageName(id, name);
 	if(response.status === 204){
-		dispatch(setUpdateMessageName({id, name}));
+		dispatch(setUpdateMessageName({id, content: name}));
 		toast.success('Данные успешно изменены')
 	}
 }
