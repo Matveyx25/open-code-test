@@ -8,8 +8,8 @@ import { Loader } from '@fluentui/react-northstar';
 import { DataTable } from '../../modules/Messages/DataTable/DataTable';
 import { toast } from 'react-toastify';
 import { Paginator } from '../../components/UI/Paginator/Paginator';
-import Dropzone, { useDropzone } from 'react-dropzone';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useDropzone } from 'react-dropzone';
+import { useNavigate } from 'react-router-dom';
 import { HomeRegular } from '@fluentui/react-icons';
 
 export const Messages = ({getAllMessages, updateMessageName, addMessage, removeMessage, fetchingList, messages, recoveryMessage, pages}) => {

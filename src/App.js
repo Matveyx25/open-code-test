@@ -7,6 +7,7 @@ import MessagesContainer from './pages/Messages/MessagesContainer';
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { HomePage } from "./pages/Home/HomePage";
+import BICPage from "./pages/Messages/BICPage";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
 						<Route path="/bank-info" element={<BankInfoContainer/>}/>
 						<Route path='/manuals/:id' element={<ManualsContainer/>}/>
 						<Route path='/messages/' element={<MessagesContainer/>}/>
+						<Route path='/messages/:id' element={<BICPage/>}/>
 						<Route path="*" element={<div className="error__not-found">404 NOT FOUND</div>} />
 					</Routes>
 				</div>

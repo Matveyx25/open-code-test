@@ -1,10 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Messages } from './Messages'
-import { getAllMessages, updateMessageName, addMessage, removeMessage, recoveryMessage } from '../../store/reducers/messages.reducer'
+import { getAllMessages, updateMessageName, addMessage, removeMessage, recoveryMessage, getMessageById } from '../../store/reducers/messages.reducer'
 
-const MessagesContainer = ({getAllMessages, updateMessageName, addMessage, removeMessage, fetchingList, messages, recoveryMessage, pages}) => 
-	<Messages {...{getAllMessages, updateMessageName, addMessage, removeMessage, fetchingList, messages, recoveryMessage, pages}}/>
+const MessagesContainer = ({getAllMessages, getMessageById, updateMessageName, addMessage, removeMessage, fetchingList, messages, recoveryMessage, pages, currentMessage}) => 
+	<Messages {...{getAllMessages, getMessageById, updateMessageName, addMessage, removeMessage, fetchingList, messages, recoveryMessage, pages, currentMessage}}/>
 
 const mapStateToProps = (state) => ({
 	messages: state.messages.messages,
@@ -13,4 +13,4 @@ const mapStateToProps = (state) => ({
 	pages: state.messages.pages
 })
 
-export default connect(mapStateToProps, { getAllMessages, updateMessageName, addMessage, removeMessage, recoveryMessage })(MessagesContainer)
+export default connect(mapStateToProps, { getAllMessages, updateMessageName, getMessageById, addMessage, removeMessage, recoveryMessage })(MessagesContainer)
