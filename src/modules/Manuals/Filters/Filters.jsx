@@ -15,10 +15,7 @@ export const Filters = ({getWithFilters, setIsDeleted, setFilters}) => {
 		onSubmit: () => {
 			getWithFilters(values)
 			setIsDeleted(values.deleted)
-		},
-		onUpdate: () => {
-			setFilters(values)
-		},
+		}
 	});
 
 	const {handleReset, values, handleChange, handleSubmit} = formik

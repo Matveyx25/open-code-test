@@ -14,10 +14,6 @@ export const Filters = ({getWithFilters, setIsDeleted, setFilters}) => {
 		onSubmit: () => {
 			getWithFilters(values)
 			setIsDeleted(values.deleted)
-		},
-		onChange: () => {
-			setFilters(values)
-			console.log(values)
 		}
 	});
 
