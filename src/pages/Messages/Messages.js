@@ -88,7 +88,11 @@ export const Messages = ({getAllMessages, updateMessageName, addMessage, removeM
 					<HomeRegular onClick={() => navigate('/')}/>
 			</div>
 			<Filters {...{getWithFilters, setIsDeleted}}/>
-			<Events {...{selected, setDialog, removeMessage, updateHandler: () => getAllMessages(), recoveryMessage, isDeleted}}/>
+			<Events {...{selected, setDialog, removeMessage, updateHandler: () => {
+				setPage(1)
+				setSelected()
+				getAllMessages(filters, page)
+			}, recoveryMessage, isDeleted}}/>
 			{fetchingList.includes('get-all-messages') ? 
 			<Loader/>
 			: <DataTable {...{messages, selected, setSelected}}/>			}

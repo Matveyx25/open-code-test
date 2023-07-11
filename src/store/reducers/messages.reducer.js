@@ -55,7 +55,7 @@ export const messagesReducer = (state = initialState, action) => {
 					const recovery_index = state.messages.findIndex(el => el.id == action.id)
 					return {
 							...state,
-							banksInfo: [
+							messages: [
 								...state.messages.slice(0, recovery_index),
 								...state.messages.slice(recovery_index + 1)
 							]
@@ -132,7 +132,7 @@ export const removeMessage = (id) => async (dispatch) => {
 
 const setRecoveryMessage = (id) => ({type: RecoveryMessage, id});
 export const recoveryMessage = (id) => async (dispatch) => {
-	let response = await messagesService.removeMessage(id);
+	let response = await messagesService.recoveryMessage(id);
 	if(response.status === 204){
 		dispatch(setRecoveryMessage(id));
 		toast.success('Данные успешно удалены')
