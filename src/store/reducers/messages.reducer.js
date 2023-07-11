@@ -127,7 +127,7 @@ export const getMessageFromServer = () => async (dispatch) => {
 	if(response.status === 201){
 		dispatch(setMessageFromServer(response.data));
 		toast.success('Данные успешно добавлены')
-	}else if(response.status === 409){
+	}else if(response.status === 200){
 		toast.warning('Актуальная информация уже загружена')
 	}
 }
