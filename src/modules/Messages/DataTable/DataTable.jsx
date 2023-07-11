@@ -57,7 +57,7 @@ export const DataTable = ({messages, selected, setSelected}) => {
 							<Table.Cell content={row.items[5]} onClick={() => selectHandler(row.key)}/>
 							<Table.Cell content={row.items[6]} onClick={() => selectHandler(row.key)}/>
 							<Table.Cell content={row.items[7]} onClick={() => selectHandler(row.key)}/>
-							<Table.Cell content={<Button content='Открыть' onClick={() => navigate('/messages/' + row.key)}/>} onClick={() => selectHandler(row.key)}/>
+							<Table.Cell content={<Button content='Открыть' onClick={() => navigate('/messages/' + row.key, { state: { name: row.items[1] }})}/>} onClick={() => selectHandler(row.key)}/>
 						</Table.Row>
 					</div>)}
 			</Table>

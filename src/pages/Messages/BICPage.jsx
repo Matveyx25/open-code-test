@@ -15,6 +15,9 @@ const BICPage = ({getMessageById, currentMessage, fetchingList, pages}) => {
 
 	const [page, setPage] = useState(1)
 
+	const { state } = useLocation();
+	const { name } = state;
+
 	useEffect(() => {
 		getMessageById(id, null, page)
 	}, [page])
@@ -29,6 +32,7 @@ const BICPage = ({getMessageById, currentMessage, fetchingList, pages}) => {
 							navigate(-1)
 						}
 					}}/>
+				{name && <p>{name}</p>}
 			</div>
 			{fetchingList.includes('get-current-message') ? 
 				<Loader/>
