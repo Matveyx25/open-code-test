@@ -1,5 +1,4 @@
 import s from './DataTable.module.scss'
-import { concatTimeAndUser } from '../../../helpers/concatTimeAndUser';
 import { Table, tableHeaderCellBehavior } from '@fluentui/react-northstar';
 
 export const DataTable = ({manuals, selected, setSelected}) => {
@@ -10,8 +9,8 @@ export const DataTable = ({manuals, selected, setSelected}) => {
 			items: [ 
 				el.code, 
 				el.description, 
-				concatTimeAndUser(el.ctime, el.cuser), 
-				concatTimeAndUser(el.etime, el.euser)]
+				el.createDateTime, 
+				el.changeDateTime]
 			})
 		)
 
