@@ -121,6 +121,17 @@ export const addMessage = (content) => async (dispatch) => {
 	}
 }
 
+const setMessageFromServer = (message) => ({type: CreateMessage, message});
+export const getMessageFromServer = () => async (dispatch) => {
+	let response = await messagesService.createMessageFromServer();
+	if(response.status === 201){
+		dispatch(setMessageFromServer(response.data));
+		toast.success('Данные успешно добавлены')
+	}else if(response.status === 409){
+		toast.warn('Актуальная информация уже загружена')
+	}
+}
+
 const deleteMessage = (id) => ({type: RemoveMessage, id});
 export const removeMessage = (id) => async (dispatch) => {
 	let response = await messagesService.removeMessage(id);

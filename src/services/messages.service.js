@@ -34,5 +34,8 @@ export const messagesService = {
 	},
 	recoveryMessage(id) {
 		return instance.patch(`/emessages/${id}`)
+	},
+	createMessageFromServer() {
+		return instance.post(`/emessages`)
 	}
 }

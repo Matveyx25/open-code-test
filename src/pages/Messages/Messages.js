@@ -12,7 +12,7 @@ import { useDropzone } from 'react-dropzone';
 import { useNavigate } from 'react-router-dom';
 import { HomeRegular } from '@fluentui/react-icons';
 
-export const Messages = ({getAllMessages, updateMessageName, addMessage, removeMessage, fetchingList, messages, recoveryMessage, pages}) => {
+export const Messages = ({getAllMessages, getMessageFromServer, updateMessageName, addMessage, removeMessage, fetchingList, messages, recoveryMessage, pages}) => {
 	const [selected, setSelected] = useState()
 	const [dialog, setDialog] = useState(false)
 	const [messageName, setMessageName] = useState('')
@@ -88,7 +88,7 @@ export const Messages = ({getAllMessages, updateMessageName, addMessage, removeM
 					<HomeRegular onClick={() => navigate('/')}/>
 			</div>
 			<Filters {...{getWithFilters, setIsDeleted}}/>
-			<Events {...{selected, setDialog, removeMessage, updateHandler: () => {
+			<Events {...{selected, setDialog, removeMessage, getMessageFromServer, updateHandler: () => {
 				setPage(1)
 				setSelected()
 				getAllMessages(filters, page)
