@@ -71,8 +71,12 @@ export const BankInfo = ({getAllBanksInfo, updateBankInfo, addBankInfo, removeBa
 			<div className="back-button-wrapper">
 					<HomeRegular onClick={() => navigate('/')}/>
 			</div>
-			<Filters {...{getWithFilters, setIsDeleted}}/>
-			<Events {...{selected, setDialog, removeBankInfo, updateHandler: () => getAllBanksInfo(), recoveryBankInfo, isDeleted}}/>
+			<Filters {...{getWithFilters, setIsDeleted, setFilters}}/>
+			<Events {...{selected, setDialog, removeBankInfo, updateHandler: () => { 
+				setPage(1)
+				setSelected()
+				getAllBanksInfo(filters, page)
+			}, recoveryBankInfo, isDeleted}}/>
 			{fetchingList.includes('get-all-banks-info') ? 
 			<Loader/>
 			: <DataTable {...{banksInfo, selected, setSelected}}/>}

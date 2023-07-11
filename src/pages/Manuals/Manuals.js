@@ -88,8 +88,12 @@ export const Manuals = ({id, manuals, fetchingList, addManual, removeManual, get
 					}}/>
 					{name && <p>{name}</p>}
 			</div>
-			<Filters {...{getWithFilters, setIsDeleted}}/>
-			<Events {...{selected, setDialog, removeManual, updateHandler: () => getManualById(id), isDeleted, recoveryManual}}/>
+			<Filters {...{getWithFilters, setIsDeleted, setFilters}}/>
+			<Events {...{selected, setDialog, removeManual, updateHandler: () => {
+				setPage(1)
+				setSelected()
+				getManualById(id, filters, page)
+			}, isDeleted, recoveryManual}}/>
 			{fetchingList.includes('get-manual-by-id') ? 
 			<Loader/>
 			: <DataTable {...{manuals, selected, setSelected}}/>}

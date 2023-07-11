@@ -59,7 +59,7 @@ export const Messages = ({getAllMessages, updateMessageName, addMessage, removeM
 				<div className='popup-wrapper'>
 					<div {...getRootProps({className: 'dropzone'})}>
 						<input {...getInputProps()} />
-						<p>{files[0]?.name || "Drag 'n' drop some files here, or click to select files"}</p>
+						<p>{files[0]?.name || "Перетащите сюда xml-файл, или нажмите, чтобы выбрать"}</p>
 					</div>
 					<Button content="Создать" onClick={() => {
 						if(files){
