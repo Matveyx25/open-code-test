@@ -1,7 +1,7 @@
 import s from './DataTable.module.scss'
 import { concatTimeAndUser } from '../../../helpers/concatTimeAndUser';
 import { Table, tableHeaderCellBehavior } from '@fluentui/react-northstar';
-import { SWBICTable } from '../../../components/UI/Tables/SWBICTable';
+import { SWBICTable } from './SWBICTable';
 
 export const BicTable = ({currentMessage}) => {
 	return (

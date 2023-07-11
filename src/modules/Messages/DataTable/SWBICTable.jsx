@@ -2,7 +2,7 @@ import { concatTimeAndUser } from '../../../helpers/concatTimeAndUser';
 import { Table, tableHeaderCellBehavior } from '@fluentui/react-northstar';
 import s from './DataTable.module.scss'
 import { useState } from 'react';
-import { Button } from '../Button/Button';
+import { Button } from '../../../components/UI/Button/Button';
 
 export const SWBICTable = ({bic}) => {
  const [isOpen, setIsOpen] = useState(false)

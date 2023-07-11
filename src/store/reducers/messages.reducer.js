@@ -30,7 +30,7 @@ export const messagesReducer = (state = initialState, action) => {
         case CreateMessage:
           return {
 						...state,
-						// messages: [...state.messages, action.message]
+						messages: [...state.messages, action.message]
 					}
         case RemoveMessage:
 					const remove_index = state.messages.findIndex(el => el.id == action.id)
@@ -115,8 +115,8 @@ export const updateMessageName = (id, name) => async (dispatch) => {
 const setNewMessage = (message) => ({type: CreateMessage, message});
 export const addMessage = (content) => async (dispatch) => {
 	let response = await messagesService.createMessage(content);
-	if(response.status === 204){
-		dispatch(setNewMessage(content));
+	if(response.status === 201){
+		dispatch(setNewMessage(response.data));
 		toast.success('Данные успешно добавлены')
 	}
 }
