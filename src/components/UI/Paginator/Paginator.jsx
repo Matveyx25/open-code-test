@@ -16,7 +16,7 @@ export const Paginator = ({page, pages, setPage}) => {
 			</button>
 			{pages > 6 ?  <div>
 				{[...pagesArr].slice(
-					(pages - 6 >= page ? page : pages- 5), 
+					(pages - 6 >= page ? page - 1 : pages- 5), 
 					page + 5)
 				.map(el => (
 					<span 

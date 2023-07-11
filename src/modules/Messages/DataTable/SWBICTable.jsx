@@ -36,7 +36,7 @@ export const SWBICTable = ({bic}) => {
 
 	return (
 		<>
-		<Table.Row>
+		<Table.Row style={{height: 'fit-content', paddingTop: 8, paddingBottom: 8}}>
 			<Table.Cell content={bic.bic}/>
 			<Table.Cell content={bic.participantInfo.nameP}/>
 			<Table.Cell content={bic.participantInfo.regN}/>

@@ -5,6 +5,7 @@ import { BicTable } from '../../modules/Messages/DataTable/BicTable'
 import { getMessageById } from '../../store/reducers/messages.reducer';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { ArrowLeftFilled } from '@fluentui/react-icons';
+import { Paginator } from '../../components/UI/Paginator/Paginator';
 
 const BICPage = ({getMessageById, currentMessage, fetchingList, pages}) => {
 	const params = useParams()
@@ -12,7 +13,7 @@ const BICPage = ({getMessageById, currentMessage, fetchingList, pages}) => {
 	const location = useLocation()
 	const navigate = useNavigate()
 
-	const [page, setPages] = useState(1)
+	const [page, setPage] = useState(1)
 
 	useEffect(() => {
 		getMessageById(id, null, page)
@@ -35,6 +36,7 @@ const BICPage = ({getMessageById, currentMessage, fetchingList, pages}) => {
 				<>
 					{currentMessage && <BicTable currentMessage={currentMessage}/>}
 				</>}
+				<Paginator {...{pages, page, setPage}}/>
 		</div>
 	)
 }
